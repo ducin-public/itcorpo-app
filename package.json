@@ -1,16 +1,22 @@
 {
-  "name": "my-app",
+  "name": "atos-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "c3": "^0.6.8",
+    "cross-env": "^5.2.0",
+    "d3": "^5.7.0",
+    "lodash.groupby": "^4.6.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "react-scripts": "2.0.4",
+    "react-test-renderer": "^16.5.2",
+    "styled-components": "^3.4.9"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=3031 react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

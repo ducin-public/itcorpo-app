@@ -6,3 +6,15 @@ export const EmployeeService = {
       .then(res => res.json())
   }
 }
+
+// crappy request with count:
+
+const getCrappyData = () => fetch('http://localhost:3030/employees')
+  .then(res => Promise.all([
+    Promise.resolve(res.headers.get('X-Total-Count')),
+    res.json()
+  ]))
+  .then(([count, data]) => ({ data, count,
+   completeness: data.length / count
+  }))
+  .then(console.log)

@@ -20,22 +20,18 @@ export class PieChart extends React.Component {
   }
 
   componentWillUpdate(nextProps){
-    // this.chart.unload();
-    // TODO: check chart.unload & chart.load
-    this.chart.destroy()
-
-    this.chart = c3.generate({
-      bindto: '#' + this.id,
-      data: {
-        columns: Object.entries(nextProps.data),
-        type : 'pie'
-      }
+    this.chart.load({
+      unload: true,
+      columns: Object.entries(nextProps.data)
     });
-
-    // this.chart.load({
-    //   columns: Object.entries(this.props.data)
-    // });
   }
+
+  // componentDidUpdate(prevProps){
+  //   this.chart.load({
+  //     unload: true,
+  //     columns: Object.entries(this.props.data)
+  //   });
+  // }
 
   componentWillUnmount(){
     this.chart.destroy()

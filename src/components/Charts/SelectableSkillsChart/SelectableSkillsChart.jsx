@@ -6,7 +6,7 @@ import { Dropdown } from '../../Dropdown/Dropdown'
 import { countBy } from '../../../utils/groupBy'
 import { hasSkillLabel, uniqueSkills } from '../../../employees'
 
-export class SelectableChart extends React.Component {
+export class SelectableSkillsChart extends React.Component {
   state = {
     chosenItem: 'JavaScript'
   }

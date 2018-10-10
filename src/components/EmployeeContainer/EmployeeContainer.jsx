@@ -4,9 +4,11 @@ import { EmployeeService } from '../../services/EmployeeService'
 import { EmployeeList } from '../EmployeeList/EmployeeList'
 import { Loading } from '../Loading/Loading'
 import { PieChart } from '../Charts/PieChart/PieChart'
-import { SelectableChart } from '../Charts/SelectableChart/SelectableChart'
+import { SelectableSkillsChart } from '../Charts/SelectableSkillsChart/SelectableSkillsChart'
+import { SelectableSalaryChart } from '../Charts/SelectableSalaryChart/SelectableSalaryChart'
 
 import { countBy, salarySumBy } from '../../utils/groupBy'
+import { selectableFields } from '../../employees'
 
 export class EmployeeContainer extends React.Component {
   state = {
@@ -32,7 +34,10 @@ export class EmployeeContainer extends React.Component {
       <PieChart
         label="Total salary by department"
         data={ salarySumBy(this.state.employees, e => e.departmentId) } />
-      <SelectableChart employees={this.state.employees} />
+      <SelectableSalaryChart
+        items={this.state.employees}
+        selectableItems={selectableFields} />
+      <SelectableSkillsChart employees={this.state.employees} />
       <EmployeeList employees={this.state.employees} />
     </React.Fragment>
   }

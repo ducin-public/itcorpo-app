@@ -5,11 +5,13 @@ export const EmployeeService = {
     return fetch(`${baseURL}employees`)
       .then(res => res.json())
   },
-  async getCollection(){ // -> Promise<Employee[]>
+  // notifyCb: (Employee[]) -> void
+  async getCollection(notifyCb){ // -> Promise<Employee[]>
     const URL = `${baseURL}employees`;
     const initialRes = await fetch(URL)
     const count = initialRes.headers.get('X-Total-Count')
     const employees = await initialRes.json();
+    notifyCb(employees)
   
     const pagesPromises = [];
     const pages = Math.ceil(count / 50)
@@ -19,6 +21,7 @@ export const EmployeeService = {
     for( let idx = 0; idx < pagesPromises.length; idx++ ){
       const res = await pagesPromises[idx]
       employees.push( ...(await res.json()) )
+      notifyCb(employees)
     }
     return employees;
   }

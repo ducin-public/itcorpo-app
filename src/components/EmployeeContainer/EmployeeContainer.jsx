@@ -18,7 +18,7 @@ export class EmployeeContainer extends React.Component {
   
   constructor(props){
     super(props)
-    EmployeeService.getEmployees()
+    EmployeeService.getCollection()
     .then(employees => {
       this.setState({ employees, loading: false })
     })

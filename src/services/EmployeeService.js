@@ -11,17 +11,18 @@ export const EmployeeService = {
     const initialRes = await fetch(URL)
     const count = initialRes.headers.get('X-Total-Count')
     const employees = await initialRes.json();
-    notifyCb(employees)
+    const getCompleteness = () => employees.length / count
+    notifyCb(employees, getCompleteness())
   
     const pagesPromises = [];
     const pages = Math.ceil(count / 50)
-    for( let idx = 2; idx < pages; idx++ ){
+    for( let idx = 2; idx <= pages; idx++ ){
       pagesPromises.push(fetch(`${URL}?_page=${idx}`))
     }
     for( let idx = 0; idx < pagesPromises.length; idx++ ){
       const res = await pagesPromises[idx]
       employees.push( ...(await res.json()) )
-      notifyCb(employees)
+      notifyCb(employees, getCompleteness())
     }
     return employees;
   }

@@ -13,13 +13,18 @@ import { selectableFields } from '../../employees'
 export class EmployeeContainer extends React.Component {
   state = {
     employees: [],
-    loading: true
+    loading: true,
+    completeness: 0
   }
   
   constructor(props){
     super(props)
-    EmployeeService.getCollection((newEmployees) => {
-      this.setState({ employees: newEmployees, loading: false })
+    EmployeeService.getCollection((newEmployees, completeness) => {
+      this.setState({
+        employees: newEmployees,
+        loading: false,
+        completeness
+      })
     }).then(employees => {
       this.setState({ employees })
     })
@@ -29,6 +34,7 @@ export class EmployeeContainer extends React.Component {
     return this.state.loading ?
     <Loading /> :
     <React.Fragment>
+      Completed: {Math.round(this.state.completeness * 10000) / 100}%
       <PieChart
         label="Employees by nationalities"
         data={ countBy(this.state.employees, e => e.nationality) } />

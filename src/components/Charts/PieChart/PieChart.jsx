@@ -21,7 +21,7 @@ export class PieChart extends React.Component {
 
   componentWillUpdate(nextProps){
     this.chart.load({
-      unload: true,
+      // unload: true,
       columns: Object.entries(nextProps.data)
     });
   }

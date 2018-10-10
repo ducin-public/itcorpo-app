@@ -18,3 +18,11 @@ const getCrappyData = () => fetch('http://localhost:3030/employees')
    completeness: data.length / count
   }))
   .then(console.log)
+
+const getLessCrappyData = async () => {
+  const res = await fetch('http://localhost:3030/employees')
+  return {
+    data: await res.json(),
+    count: res.headers.get('X-Total-Count')
+  }
+}
